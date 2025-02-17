@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: clickhouse
+    restart: always
+    ports:
+      - "8123:8123"  # HTTP Interface
+      - "9000:9000"  # Native TCP Interface
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+    #  - ./config.xml:/etc/clickhouse-server/config.xml
+    # - ./users.xml:/etc/clickhouse-server/users.xml
+    environment:
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_PASSWORD: ""
+      CLICKHOUSE_DB: default
+      CLICKHOUSE_LOG_LEVEL: "trace"
+
+volumes:
+  clickhouse_data:
+
